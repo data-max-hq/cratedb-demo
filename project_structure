@@ -1,0 +1,11 @@
+cratedb-demo/
+├── cratedb_demo/           # Main package directory (note: underscore instead of hyphen)
+│   ├── __init__.py        # Makes the directory a Python package
+│   └── main.py            # Your main module
+├── tests/                  # Test directory
+│   ├── __init__.py
+│   └── test_main.py       # Tests for main.py
+├── .env                    # Environment variables
+├── .gitignore
+├── pyproject.toml         # Poetry configuration
+└── README.md 
