@@ -1,17 +1,13 @@
-import os
-from crate import client
 from dotenv import load_dotenv
+from services.client import create_cratedb_client
+from infrastructure.create_database_objects import create_database_objects
 
 load_dotenv()
 
-cluster_connection = client.connect(
-    servers=os.getenv("CLUSTER_HOST"),
-    username=os.getenv("CLUSTER_USERNAME"),
-    password=os.getenv("CLUSTER_PASSWORD"),
-)
+# Create CrateDB client
+cratedb_client = create_cratedb_client()
 
-with cluster_connection:
-    cursor = cluster_connection.cursor()
-    cursor.execute("SELECT name FROM sys.cluster")
-    result = cursor.fetchone()
-    print(result)
+# Create infrastructure
+create_database_objects(cratedb_client, "sql/wfigs.sql")
+
+# Data ingestion
