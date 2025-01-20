@@ -5,5 +5,8 @@ def ingest_csv(cratedb_client, ddl_scripts_path: str) -> None:
         ingest_csv_sql = sql_file.read()
 
     cursor.execute(ingest_csv_sql)
+    result = cursor.fetchall()
+    print(result)
+    row_count = len(result)
     cursor.close()
-    print("WFIGS data ingested successfully!")
+    print(f"WFIGS data ingested successfully! {row_count} rows affected.")
