@@ -7,7 +7,7 @@ load_dotenv()
 cluster_connection = client.connect(
     servers=os.getenv("CLUSTER_HOST"),
     username=os.getenv("CLUSTER_USERNAME"),
-    password=os.getenv("CLUSTER_PASSWORD")
+    password=os.getenv("CLUSTER_PASSWORD"),
 )
 
 with cluster_connection:
