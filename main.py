@@ -11,3 +11,6 @@ cratedb_client = create_cratedb_client()
 create_database_objects(cratedb_client, "sql/wfigs.sql")
 
 # Data ingestion
+# todo: Sindi - Ingest wfigs.csv data in CrateDB
+# todo: Sindi - Create table for /wfigs.geojson (check wfigs-geo.sql)
+# todo: Sindi - Ingest /wfigs.geojson data to CrateDB
