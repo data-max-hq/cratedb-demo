@@ -6,4 +6,4 @@ def create_database_objects(cratedb_client, ddl_scripts_path: str) -> None:
 
     cursor.execute(create_table_sql)
     cursor.close()
-    print("WFIGS table created successfully!")
+    print(f"Table {ddl_scripts_path} is created successfully!")
