@@ -1,4 +1,3 @@
 CREATE TABLE IF NOT EXISTS wfigs-geo (
     OBJECTID INTEGER,
-    OBJECT OBJECT
-);
+    geometry
