@@ -1,6 +1,11 @@
+-- This query analyzes the temporal relationship between fire-related emergency calls
+-- and actual wildfires. It groups data by hour and shows how many active fires were
+-- discovered during hours when fire-related emergency calls were made, along with
+-- the average fire size. This helps identify potential correlations between
+-- emergency calls and fire incidents.
+
 SELECT 
     date_trunc('hour', ec.created_at) as time_bucket,
-    count(DISTINCT ec.id) as emergency_calls,
     count(DISTINCT w.object_id) as active_fires,
     avg(w.incident_size) as avg_fire_size
 FROM emergency_calls ec
