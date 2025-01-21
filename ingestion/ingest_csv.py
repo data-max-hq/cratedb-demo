@@ -1,8 +1,12 @@
 import pandas as pd
+import json
 
 def ingest_csv(cratedb_client, csv_file_path: str, table_name:str, delimiter=",") -> None:
 
     df = pd.read_csv(csv_file_path, encoding="utf-8-sig", sep=delimiter)
+    
+    # if 'location' in df.columns:oke
+    
     columns = list(df.columns)
     columns_str = f", ".join(columns)
     placeholders = ", ".join(["%s"] * len(columns))
