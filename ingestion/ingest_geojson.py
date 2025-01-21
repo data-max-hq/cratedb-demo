@@ -10,8 +10,8 @@ def ingest_geojson(cratedb_client, json_file_path: str) -> None:
         geojson = json.load(f)
         for feature in geojson['features']:
             properties = feature['properties']
-            geometry = feature['geometry']
-            lst = [properties['OBJECTID'], json.dumps(geometry)]
+            geometry = feature['geometry']['coordinates']
+            lst = [properties['OBJECTID'], geometry]
             data.append(lst)
     df = pd.DataFrame(data=data, columns=columns)
 

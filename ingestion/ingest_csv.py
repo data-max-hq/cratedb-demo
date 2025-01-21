@@ -1,13 +1,13 @@
 import pandas as pd
 
-def ingest_csv(cratedb_client, csv_file_path: str) -> None:
+def ingest_csv(cratedb_client, csv_file_path: str, table_name:str, delimiter=",") -> None:
 
-    df = pd.read_csv(csv_file_path, encoding="utf-8-sig")
+    df = pd.read_csv(csv_file_path, encoding="utf-8-sig", sep=delimiter)
     columns = list(df.columns)
-    columns_str = ", ".join(columns) 
+    columns_str = f", ".join(columns)
     placeholders = ", ".join(["%s"] * len(columns))
 
-    sql_query = f"INSERT INTO wfigs ({columns_str}) VALUES ({placeholders})"
+    sql_query = f"INSERT INTO {table_name} ({columns_str}) VALUES ({placeholders})"
 
     cursor = cratedb_client.cursor()
     total_records = len(df)

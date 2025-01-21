@@ -9,15 +9,11 @@ CREATE TABLE IF NOT EXISTS wfigs (
     fire_discovery_date_time TIMESTAMP,
     gacc TEXT,
     incident_name TEXT,
-    initial_latitude DOUBLE PRECISION,
-    initial_longitude DOUBLE PRECISION,
     irwin_id TEXT,
     poo_county TEXT,
     poo_state TEXT,
     unique_fire_identifier TEXT,
     created_on_date_time_dt TIMESTAMP,
     source_global_id TEXT,
-    global_id TEXT,
-    x DOUBLE PRECISION,
-    y DOUBLE PRECISION
+    global_id TEXT
 );
