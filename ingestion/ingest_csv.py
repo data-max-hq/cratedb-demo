@@ -21,8 +21,15 @@ def ingest_csv(cratedb_client, csv_file_path: str, table_name:str, delimiter=","
         debug_query = sql_query
         for value in values:
             if isinstance(value, str):
-                value = value.replace("'", "")
-            debug_query = debug_query.replace("%s", repr(value), 1)
+                if value.startswith('[') and value.endswith(']'):
+                    # For array values, don't add quotes around them
+                    debug_query = debug_query.replace("%s", value, 1)
+                else:
+                    # For regular strings, remove single quotes and use repr
+                    value = value.replace("'", "")
+                    debug_query = debug_query.replace("%s", repr(value), 1)
+            else:
+                debug_query = debug_query.replace("%s", repr(value), 1)
         cursor.execute(debug_query)
         
         if (index + 1) % 50 == 0:
