@@ -10,6 +10,8 @@ packages = [{include = "cratedb_demo"}]
 python = "^3.10"
 crate = "^0.35.1"
 python-dotenv = "^1.0.1"
+pandas = "^2.2.1"
+numpy = "^1.26.4"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.0"
