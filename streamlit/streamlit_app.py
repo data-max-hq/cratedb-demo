@@ -1,5 +1,5 @@
 import streamlit as st
-from datetime import datetime
+from datetime import date
 
 st.set_page_config(
     page_title="CrateDB demo",
@@ -25,10 +25,10 @@ with st.sidebar:
         st.write(f"You selected {selected_city}")
         start_time = st.slider(
             "Select Date:",
-            value=datetime(2025, 1, 1, 9, 30),
-            format="MM/DD/YY - hh:mm",
+            value=date(2025, 1, 1),
+            format="MM/DD/YY",
         )
-        st.write("Start time:", start_time)
+        st.write("Date:", start_time)
         st.button("Apply")
     elif st.session_state.sidebar_mode == "incident":
         st.title("⚠️ Search Incident Type ⚠️")
