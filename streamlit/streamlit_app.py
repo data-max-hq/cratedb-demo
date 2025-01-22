@@ -263,7 +263,10 @@ elif st.session_state.sidebar_mode == "map":
         st.map(st.session_state.map_data)
 
 elif st.session_state.sidebar_mode == "incident":
-    st.subheader("Emergency Calls Records:  Jan-Feb 2025")
+    st.markdown("""
+        <h2 style='text-align: center;'>Emergency Calls Records:  Jan-Feb 2025</h2>
+    """, unsafe_allow_html=True)
+     
     columns, results = fetch_all_emergency_calls()
     df = pd.DataFrame(results, columns=columns)
     df['created_at'] = pd.to_datetime(df['created_at'], unit='ms').dt.strftime('%B %d %Y')
@@ -274,4 +277,8 @@ elif st.session_state.sidebar_mode == "incident":
         df = pd.DataFrame(results, columns=columns)
         df['created_at'] = pd.to_datetime(df['created_at'], unit='ms').dt.strftime('%B %d %Y')
     
-    st.dataframe(df)
+    st.dataframe(
+        df,
+        use_container_width=True,
+        height=525
+    )
