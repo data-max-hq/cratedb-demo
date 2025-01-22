@@ -42,18 +42,31 @@ if st.session_state.sidebar_mode != "dashboards":
                 "US-WI", "US-WY"
             ]
             selected_state = st.selectbox("Select a state:", state_codes)
-            if st.button("Apply"):
+            col1, col2 = st.columns(2)
+            
+            if col1.button("Apply"):
                 st.session_state.selected_state = selected_state
+                st.rerun()
+            
+            if col2.button("Reset"):
+                st.session_state.selected_state = None
+                st.session_state.map_data = None
                 st.rerun()
 
         elif st.session_state.sidebar_mode == "incident":
             st.title("⚠️ Search Incident Type ⚠️")
             search_input = st.text_input("Enter incident type:", placeholder="e.g., fire, accident, etc.")
-
-            if st.button("Search"):
+            
+            col1, col2 = st.columns(2)
+            
+            if col1.button("Search"):
                 if search_input:
                     st.session_state.incident_search = search_input
                     st.rerun()
+            
+            if col2.button("Reset"):
+                st.session_state.incident_search = None
+                st.rerun()
 
 
 # Button row
