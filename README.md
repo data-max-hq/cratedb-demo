@@ -1,135 +1,101 @@
-# CrateDB Demo Project
+# CrateDB Wildfire Analytics Demo
+
+A demonstration project showcasing CrateDB's capabilities in handling diverse data types, geospatial queries, full-text search, and real-time analytics through a Streamlit interface.
 
 ## Overview
-This project demonstrates the integration and usage of CrateDB with Python, showcasing data ingestion, querying, and analysis capabilities. The demo focuses on working with time-series data and implementing efficient data management practices.
+
+This project combines wildfire incident data with emergency call records to demonstrate CrateDB's ability to:
+- Handle geospatial data and queries
+- Perform full-text search on transcription records
+- Process time-series data
+- Manage multiple data types efficiently
+- Visualize data through an interactive dashboard
 
 ## Project Structure
+
 ```
-cratedb-demo/
-├── .github/            # GitHub specific configurations
-├── .pytest_cache/     # pytest cache directory
-├── __pycache__/      # Python cache directory
-├── .venv/           # Virtual environment directory
-├── tests/          # Test files
-├── .gitignore     # Git ignore file
-├── .pre-commit-config.yaml  # Pre-commit hooks configuration
-├── LICENSE        # License file
-├── README.md     # Project documentation
-├── poetry.lock   # Poetry lock file
-└── pyproject.toml # Poetry project configuration
-```
-
-## Prerequisites
-- Python 3.8+
-- CrateDB instance
-- Docker (optional, for local CrateDB deployment)
-- [Poetry](https://python-poetry.org/docs/#installation) for dependency management
-
-## Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/cratedb-demo.git
-cd cratedb-demo
+├── analytics/
+│   ├── emergency_calls.py    # Emergency calls analysis queries
+│   ├── fire_analysis.py      # Fire incident analysis
+│   ├── fire_locations.py     # Geospatial queries
+│   ├── fire_temporal.py      # Time-based analysis
+│   └── sql/                  # Raw SQL queries
+├── infrastructure/
+│   └── create_database_objects.py  # Database setup
+├── ingestion/
+│   ├── ingest_csv.py        # CSV data ingestion
+│   └── ingest_geojson.py    # GeoJSON data ingestion
+├── services/
+│   └── client.py            # CrateDB connection handling
+├── sql/
+│   ├── emergency-calls.sql  # Emergency calls table schema
+│   ├── wfigs.sql           # Wildfire incidents schema
+│   └── wfigs-geo.sql       # Geospatial data schema
+├── streamlit/
+│   ├── streamlit_app.py    # Main Streamlit application
+│   └── fetch_data.py       # Data fetching utilities
 ```
 
-2. Install dependencies using Poetry:
+## Features
+
+### 1. Interactive Dashboards
+- Daily fire incidents visualization
+- Emergency call type distribution
+- Fire size distribution analysis
+- Geographic visualization of fires in LA County
+
+### 2. Data Analysis Capabilities
+- Temporal correlation between fires and emergency calls
+- Geospatial analysis of fire locations
+- Full-text search in emergency call transcripts
+- Statistical analysis of fire sizes and distributions
+
+### 3. Search Functionality
+- State-based wildfire filtering
+- Keyword-based emergency call search
+- Interactive map visualization
+
+## Technology Stack
+
+- **Database**: CrateDB
+- **Frontend**: Streamlit
+- **Data Processing**: Pandas, NumPy
+- **Visualization**: Plotly
+- **Language**: Python 3.10+
+
+## Setup
+
+1. Install dependencies:
 ```bash
 poetry install
 ```
 
-3. Activate the virtual environment:
+2. Configure environment variables:
 ```bash
-poetry shell
+CLUSTER_HOST=your_cratedb_host
+CLUSTER_USERNAME=your_username
+CLUSTER_PASSWORD=your_password
 ```
 
-4. Configure CrateDB connection:
-- Update the connection settings in `src/config.py`
-- Ensure CrateDB is running and accessible
-
-## Key Features
-- Database connection management with error handling
-- Data ingestion examples
-- Time-series data handling
-- Query optimization demonstrations
-- Data analysis examples using Jupyter notebooks
-
-## Usage
-
-### Basic Connection
-```python
-from src.connection import create_connection
-
-conn = create_connection()
-```
-
-### Running Queries
-```python
-from src.utils import execute_query
-
-result = execute_query(conn, "SELECT * FROM your_table LIMIT 5")
-```
-
-## Project Components
-
-### Configuration (`src/config.py`)
-Contains configuration settings for:
-- Database connection parameters
-- Logging settings
-- Data paths
-
-### Connection Management (`src/connection.py`)
-Handles:
-- Database connection establishment
-- Connection pooling
-- Error handling
-
-### Utilities (`src/utils.py`)
-Provides:
-- Query execution helpers
-- Data transformation functions
-- Common database operations
-
-## Development Tools
-
-- **Poetry**: Dependency management and packaging
-- **pre-commit**: Git hooks for code quality checks
-
-### Running Pre-commit Hooks
-
-We use pre-commit hooks to ensure code quality. To run them manually:
-
+3. Run the Streamlit application:
 ```bash
-poetry run pre-commit run --all-files
+poetry run streamlit run streamlit/streamlit_app.py
 ```
 
-## Contributing
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Create a Pull Request
+## Data Types Demonstrated
 
-## Data Sources
-The project includes sample datasets for demonstration purposes. These datasets are stored in the `data/` directory and include:
-- Time-series data
-- Sample structured data
-- Test datasets
+- **Geospatial**: GEO_POINT for fire and emergency locations
+- **Temporal**: TIMESTAMP for event timing
+- **Numeric**: DOUBLE PRECISION for fire sizes
+- **Text**: TEXT with fulltext indexing for search
+- **Categorical**: TEXT for classifications
 
-## Running the Application
+## Key SQL Features Used
 
-To start the application:
-
-```bash
-poetry run python main.py
-```
-
-## License
-[Add your license information here]
-
-## Contact
-[Your contact information]
-
----
-
-**Note:** This is a demonstration project. For production use, please ensure proper security measures and optimizations are implemented.
+- Geospatial functions (within, distance)
+- Full-text search (MATCH)
+- Time-based aggregations (DATE_TRUNC)
+- Complex JOINs
+- Window functions
+- Case statements
+- Group by operations
