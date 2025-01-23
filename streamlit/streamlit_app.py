@@ -14,7 +14,6 @@ st.set_page_config(
 
 st.header(":package:  CrateDB Demo  :package:")
 
-# Initialize session states
 if "sidebar_mode" not in st.session_state:
     st.session_state.sidebar_mode = None
 if "map_data" not in st.session_state:
@@ -118,7 +117,7 @@ if st.session_state.sidebar_mode == "dashboards":
         st.header("1. Daily Fires")
         columns, results = fetch_daily_fires()
         df = pd.DataFrame(results, columns=columns)
-        df['discovery_date'] = pd.to_datetime(df['discovery_date'], unit='ms').dt.strftime('%B %d')
+        df['discovery_date'] = pd.to_datetime(df['discovery_date'], unit='ms').dt.strftime('%b %d')
         df = df.sort_values('discovery_date')
         
         fig = px.line(
@@ -271,14 +270,27 @@ elif st.session_state.sidebar_mode == "incident":
     df = pd.DataFrame(results, columns=columns)
     df['created_at'] = pd.to_datetime(df['created_at'], unit='ms').dt.strftime('%B %d %Y')
     
-    # If there's a search, filter the dataframe
+    df['lon'] = df['location'].apply(lambda x: x[0])
+    df['lat'] = df['location'].apply(lambda x: x[1])
+    
     if st.session_state.incident_search:
         columns, results = fetch_emergency_calls_search(st.session_state.incident_search)
-        df = pd.DataFrame(results, columns=columns)
-        df['created_at'] = pd.to_datetime(df['created_at'], unit='ms').dt.strftime('%B %d %Y')
-    
-    st.dataframe(
-        df,
-        use_container_width=True,
-        height=525
-    )
+        filtered_df = pd.DataFrame(results, columns=columns)
+        filtered_df['created_at'] = pd.to_datetime(filtered_df['created_at'], unit='ms').dt.strftime('%B %d %Y')
+        
+        filtered_df['lon'] = filtered_df['location'].apply(lambda x: x[0])
+        filtered_df['lat'] = filtered_df['location'].apply(lambda x: x[1])
+        
+        st.dataframe(
+            filtered_df,
+            use_container_width=True,
+            # height=525
+        )
+        st.map(filtered_df[['lat', 'lon']])
+    else:    
+        st.dataframe(
+            df,
+            use_container_width=True,
+            height=525
+        )
+        st.map(df[['lat', 'lon']])
