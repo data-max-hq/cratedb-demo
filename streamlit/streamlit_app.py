@@ -76,7 +76,7 @@ if left.button("Map", icon="🌎", use_container_width=True):
     st.session_state.incident_search = None
     st.rerun()
 
-if middle.button("Search incident type", icon="⚠️", use_container_width=True):
+if middle.button("Emergency calls", icon="⚠️", use_container_width=True):
     st.session_state.sidebar_mode = "incident"
     st.session_state.map_data = None
     st.session_state.selected_state = None
