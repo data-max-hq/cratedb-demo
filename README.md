@@ -77,7 +77,7 @@ CLUSTER_USERNAME=your_username
 CLUSTER_PASSWORD=your_password
 ```
 
-3. Run python app to create tables and ingest data in CrateDB:
+3. Run python app to create tables and ingest data in CrateDB cluster:
 ```bash
 poetry run python main.py
 ```   
