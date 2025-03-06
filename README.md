@@ -77,7 +77,12 @@ CLUSTER_USERNAME=your_username
 CLUSTER_PASSWORD=your_password
 ```
 
-3. Run the Streamlit application:
+3. Run python app to reate tables and ingest data in CrateDB:
+```bash
+poetry run python main.py
+```   
+
+4. Run the Streamlit application:
 ```bash
 poetry run streamlit run streamlit/streamlit_app.py
 ```
