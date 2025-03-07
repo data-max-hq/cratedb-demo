@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Your project description"
 authors = ["Sindi Ziu <sindi@datamax.ai>", "Dardan Xhymshiti <dardan@datamax.ai>"]
 readme = "README.md"
-packages = [{include = "cratedb_demo"}]
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.10"
