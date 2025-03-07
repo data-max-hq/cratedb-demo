@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  cratedb:
+    container_name: cratedb-chatbot
+    image: crate
+    ports:
+      - "4200:4200"
+      - "5432:5432"
+    environment:
+      - CRATE_HEAP_SIZE=1g
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
