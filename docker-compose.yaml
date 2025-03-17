@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   cratedb:
-    container_name: cratedb-chatbot
+    container_name: cratedb-datamax-demo
     image: crate
     ports:
       - "4200:4200"
