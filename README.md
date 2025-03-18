@@ -47,15 +47,14 @@ This project combines wildfire incident data with emergency call records to demo
 * Poetry 2.0+
 * Docker (for local Crate cluster)
 
-## Setup
 
-### Getting the Code
+## Getting the Code
 ```bash
 git clone https://github.com/data-max-hq/cratedb-demo.git
 cd cratedb-demo
 ```
 
-### Install Dependencies
+## Install Dependencies
 
 This also sets up a virtual environment if not already running in one.
 
@@ -63,10 +62,10 @@ This also sets up a virtual environment if not already running in one.
 poetry install
 ```
 
-### Getting the CrateDB cluster
+## Getting the CrateDB cluster
 To store the data we will need a CrateDB database. Choose between a free hosted instance in the cloud, or run the database locally.
 
-#### Cloud option
+### Cloud option
 
 Create a database in the cloud at [console.cratedb.cloud](https://console.cratedb.cloud/).
 
@@ -84,7 +83,7 @@ Password:          the-password-will-be-here
 ```
 Wait until the cluster status shows a green status icon and "Healthy" status before continuing. Note that it may take a few moments to provision your database.
 
-#### Local Option
+### Local Option
 The best way to run CrateDB locally is by using Docker. We've provided a Docker Compose file for you. Once you've installed Docker Desktop, you can start the database like this:
 ```bash
 docker compose up
@@ -96,16 +95,17 @@ http://localhost:4200
 ```
 Note that if you have something else running on port 4200 (CrateDB admin UI) or port 5432 (Postgres protocol port) you'll need to stop those other services first, or edit the Docker compose file to expose these ports at different numbers on your local machine.
 
-### Configure environment variables
+## Configure environment variables
 
-Create a file for our environment variables named ".env" and configure the variables depending on local or cloud CrateDB configuration as such:
+1. Create a file named ".env".
+2. Configure the environment variables depending on local or cloud CrateDB configuration as such:
 ```bash
 CLUSTER_HOST=your_cratedb_host:4200
 CLUSTER_USERNAME=your_username
 CLUSTER_PASSWORD=your_password
 ```
 
-### Running the app
+## Running the app
 
 Now we have everything needed for our app to run smoothly.
 
